@@ -1,8 +1,0 @@
-ea4bc82a6ad023ab7ee23ee620429895
-::res://::1731884094
-export_presets.cfg::TextFile::-1::1731880322::0::1::::<><>::
-game.gd::GDScript::-1::1731877032::0::1::::<>Node2D<>::
-game.tscn::PackedScene::6827600689255885070::1731877736::0::1::::<><>::res://game.gd<>uid://d17mxuvpdbpyj::::res://player.tscn
-icon.svg::CompressedTexture2D::793203803224913926::1731819095::1731819119::1::::<><>::
-player.gd::GDScript::-1::1731877736::0::1::::<>CharacterBody2D<>::
-player.tscn::PackedScene::9051002834564561613::1731877737::0::1::::<><>::res://player.gd

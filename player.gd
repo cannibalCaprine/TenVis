@@ -6,9 +6,6 @@ var health: float = max_health:
 	set(value): health = clampf(value, 0, max_health)
 var x_skid = false
 
-
-var max_len: float = 0
-
 var max_accel: float = 20
 var min_accel: float = 15
 var accel: float: # linearly interpolate based on health
