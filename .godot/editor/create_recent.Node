@@ -1,0 +1,4 @@
+Label
+CollisionShape2D
+ColorRect
+CharacterBody2D
