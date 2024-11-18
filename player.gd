@@ -14,8 +14,9 @@ var accel: float: # linearly interpolate based on health
 var max_speed: float = 600
 var min_skid: float = 400
 
-var grav_accel: float = 20;
-var max_fall: float = 200
+var grav_accel: float = 5;
+var max_fall: float = 400
+var max_up: float = 100 #arbitrary for the time being
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,6 +31,8 @@ func _physics_process(_delta: float) -> void:
 	var prev_x_sign = signf(velocity.x)
 	get_input();
 	velocity.x = clampf(velocity.x, -max_speed, max_speed)
+	velocity.y += 20
+	velocity.y = clampf(velocity.y, max_fall, max_up)
 	
 	# round it down
 	if(Global.basically_zero(velocity.x, 1)):
@@ -37,8 +40,6 @@ func _physics_process(_delta: float) -> void:
 	
 	if signf(velocity.x) != prev_x_sign || signf(velocity.x) == 0:
 		x_skid = false
-		
-	velocity.y += 20
 		
 	move_and_slide();
 	
