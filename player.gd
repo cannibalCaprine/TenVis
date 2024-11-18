@@ -13,6 +13,9 @@ var accel: float: # linearly interpolate based on health
 	
 var max_speed: float = 600
 var min_skid: float = 400
+
+var grav_accel: float = 20;
+var max_fall: float = 200
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,7 +26,7 @@ func _ready() -> void:
 #func _process(_delta: float) -> void:
 	#pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var prev_x_sign = signf(velocity.x)
 	get_input();
 	velocity.x = clampf(velocity.x, -max_speed, max_speed)
@@ -31,14 +34,13 @@ func _physics_process(delta: float) -> void:
 	# round it down
 	if(Global.basically_zero(velocity.x, 1)):
 		velocity.x = 0
-	if(Global.basically_zero(velocity.y, 1)):
-		velocity.y = 0
 	
 	if signf(velocity.x) != prev_x_sign || signf(velocity.x) == 0:
 		x_skid = false
 		
-	var motion = velocity*delta;
-	move_and_collide(motion);
+	velocity.y += 20
+		
+	move_and_slide();
 	
 func get_input() -> void:
 	var curr_accel = lerpf(accel, 0, velocity.length() / max_speed)
@@ -65,11 +67,11 @@ func get_input() -> void:
 	velocity.x += x_accel
 	if x_skid:
 		if x_dir == 0:
-			velocity *= 0.85
+			velocity.x *= 0.85
 		else:
-			velocity *= 0.9
+			velocity.x *= 0.9
 	elif x_dir == 0:
-		velocity *= 0.7
+		velocity.x *= 0.7
 	
 	if Input.is_key_pressed(KEY_E):
 		health += 0.5
